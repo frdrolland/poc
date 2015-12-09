@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.fro.poc.rpm</groupId>
+	<artifactId>rpm-core-parent</artifactId>
+	<version>1.0.0</version>
+	<name>poc-rundeck</name>
+	<packaging>pom</packaging>
+
+	<properties>
+		<dependency.version.log4j2>2.3</dependency.version.log4j2>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<rpm.group>users</rpm.group>
+	</properties>
+
+	<modules>
+		<module>../java-module</module>
+	</modules>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<version>2.1.1</version>
+				<executions>
+					<execution>
+						<id>attach-rpm</id>
+						<goals>
+							<goal>attached-rpm</goal>
+						</goals>
+						<configuration>
+							<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+							<group>${rpm.group}</group>
+							<mappings>
+								<mapping>
+									<directory>${rpm.directory}</directory>
+									<filemode>$rpm.permissions}</filemode>
+									<username>${rpm.user}</username>
+									<groupname>${rpm.usergroup}</groupname>
+								</mapping>
+							</mappings>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
